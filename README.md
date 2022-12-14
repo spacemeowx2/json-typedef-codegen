@@ -1,5 +1,13 @@
 # jtd-codegen: Generate code from JSON Typedef schemas
 
+## This is a fork
+
+This is a fork of
+[jsontypedef/json-typedef-codegen](https://github.com/jsontypedef/json-typedef-codegen).
+This fork is intended to be used with Deno.
+
+## What is jtd-codegen?
+
 [JSON Type Definition](https://jsontypedef.com), aka
 [RFC8927](https://tools.ietf.org/html/rfc8927), is an easy-to-learn,
 standardized way to define a schema for JSON data. You can use JSON Typedef to
@@ -12,11 +20,11 @@ Typedef schema:
 
 ```json
 {
-    "properties": {
-        "name": { "type": "string" },
-        "isAdmin": { "type": "boolean" },
-        "favoriteNumbers": { "elements": { "type": "float64" }}
-    }
+  "properties": {
+    "name": { "type": "string" },
+    "isAdmin": { "type": "boolean" },
+    "favoriteNumbers": { "elements": { "type": "float64" } }
+  }
 }
 ```
 
@@ -24,9 +32,9 @@ You can generate this TypeScript interface:
 
 ```ts
 export interface User {
-    favoriteNumbers: number[];
-    isAdmin: boolean;
-    name: string;
+  favoriteNumbers: number[];
+  isAdmin: boolean;
+  name: string;
 }
 ```
 
@@ -44,12 +52,12 @@ type User struct {
 
 Or types/classes/structs for any of the following programming languages:
 
-* C# with `System.Text.Json` as the JSON backend
-* Golang
-* Java with Jackson as the JSON backend
-* Python
-* Rust
-* TypeScript
+- C# with `System.Text.Json` as the JSON backend
+- Golang
+- Java with Jackson as the JSON backend
+- Python
+- Rust
+- TypeScript
 
 With many more on the way. If you'd like a particular programming language
 included, please open an issue on this repo!
@@ -60,21 +68,21 @@ included, please open an issue on this repo!
 data. A JSON Type Definition schema describes what is and isn't a "valid" JSON
 document. JSON Type Definition is easy to learn, portable (there are
 functionally-identical implementations across many programming languages) and
-standardized (the spec is set in stone as [IETF RFC
-8927](https://tools.ietf.org/html/rfc8927)).
+standardized (the spec is set in stone as
+[IETF RFC 8927](https://tools.ietf.org/html/rfc8927)).
 
 Here's an example of a JSON Type Definition schema:
 
 ```json
 {
-    "properties": {
-        "name": {
-            "type": "string"
-        },
-        "isAdmin": {
-            "type": "boolean"
-        }
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "isAdmin": {
+      "type": "boolean"
     }
+  }
 }
 ```
 
@@ -82,12 +90,14 @@ This schema considers any object with a `name` property (whose value must be a
 string), an `isAdmin` property (whose value must a boolean), and no other
 properties, to be valid.
 
-To learn more about JSON Type Definition, [check out the online documentation at
+To learn more about JSON Type Definition,
+[check out the online documentation at
 jsontypedef.com](https://jsontypedef.com).
 
 ## Installation
 
-Go to [the latest `jtd-codegen` release on
+Go to
+[the latest `jtd-codegen` release on
 GitHub](https://github.com/jsontypedef/json-typedef-codegen/releases/latest),
 and then install the file for your platform.
 
@@ -122,11 +132,11 @@ else, use the appropriate "out" parameter for your desired language. For
 specific instructions for each programming languages, check out the
 documentation for:
 
-* C# with `System.Text.Json` as the JSON backend
-* Golang
-* Java with Jackson as the JSON backend
-* Python
-* TypeScript
+- C# with `System.Text.Json` as the JSON backend
+- Golang
+- Java with Jackson as the JSON backend
+- Python
+- TypeScript
 
 You can produce code for multiple programming languages at once. Just pass all
 of the relevant parameters in the `jtd-codegen` invocation. For example:
@@ -152,25 +162,25 @@ For example, this schema:
 
 ```json
 {
-    "properties": {
-        "name": {
-            "metadata": {
-                "description": "The user's name"
-            },
-            "type": "string"
-        },
-        "status": {
-            "metadata": {
-                "description": "The user's account status",
-                "enumDescription": {
-                    "UNVERIFIED": "The user's email has not yet been verified",
-                    "VERIFIED": "The user's email has been verified",
-                    "DISABLED": "The user's account was terminated"
-                }
-            },
-            "enum": ["UNVERIFIED", "VERIFIED", "DISABLED"]
+  "properties": {
+    "name": {
+      "metadata": {
+        "description": "The user's name"
+      },
+      "type": "string"
+    },
+    "status": {
+      "metadata": {
+        "description": "The user's account status",
+        "enumDescription": {
+          "UNVERIFIED": "The user's email has not yet been verified",
+          "VERIFIED": "The user's email has been verified",
+          "DISABLED": "The user's account was terminated"
         }
+      },
+      "enum": ["UNVERIFIED", "VERIFIED", "DISABLED"]
     }
+  }
 }
 ```
 
@@ -181,32 +191,32 @@ Generates into this TypeScript:
  * The user's account status
  */
 export enum UserStatus {
-    /**
-     * The user's account was terminated
-     */
-	Disabled = "DISABLED",
+  /**
+   * The user's account was terminated
+   */
+  Disabled = "DISABLED",
 
-    /**
-     * The user's email has not yet been verified
-     */
-	Unverified = "UNVERIFIED",
+  /**
+   * The user's email has not yet been verified
+   */
+  Unverified = "UNVERIFIED",
 
-    /**
-     * The user's email has been verified
-     */
-	Verified = "VERIFIED",
+  /**
+   * The user's email has been verified
+   */
+  Verified = "VERIFIED",
 }
 
 export interface User {
-    /**
-     * The user's name
-     */
-    name: string;
+  /**
+   * The user's name
+   */
+  name: string;
 
-    /**
-     * The user's account status
-     */
-    status: UserStatus;
+  /**
+   * The user's account status
+   */
+  status: UserStatus;
 }
 ```
 
@@ -218,16 +228,16 @@ example, if you generate TypeScript from this schema:
 
 ```json
 {
-    "properties": {
-        "name": {
-            "metadata": {
-                "typescriptType": "MyCustomNameType"
-            },
-            "type": "string"
-        },
-        "isAdmin": { "type": "boolean" },
-        "favoriteNumbers": { "elements": { "type": "float64" }}
-    }
+  "properties": {
+    "name": {
+      "metadata": {
+        "typescriptType": "MyCustomNameType"
+      },
+      "type": "string"
+    },
+    "isAdmin": { "type": "boolean" },
+    "favoriteNumbers": { "elements": { "type": "float64" } }
+  }
 }
 ```
 
@@ -235,30 +245,30 @@ You'll get:
 
 ```ts
 export interface User {
-    favoriteNumbers: number[];
-    isAdmin: boolean;
-    name: MyCustomNameType;
+  favoriteNumbers: number[];
+  isAdmin: boolean;
+  name: MyCustomNameType;
 }
 ```
 
 Each language supported by `jtd-codegen` supports a different set of overrides:
 
-* C# with `System.Text.Json` as the JSON backend
-    * `csharpSystemTextType` overrides the entire outputted type
-    * `csharpSystemTextContainer` overrides `IList<T>` or `IDictionary<string,
-      T>` in favor of a different container type
-* Golang
-    * `goType` overrides the entire outputted type
-* Java with Jackson as the JSON backend
-    * `javaJacksonType` overrides the entire outputted type
-    * `javaJacksonContainer` overrides `List<T>` or `Map<String, T>` in favor of
-      a different container type
-* Python
-    * `pythonType` overrides the entire outputted type
-* Rust
-    * `rustType` overrides the entire outputted type
-* TypeScript
-    * `typescriptType` overrides the entire outputted type
+- C# with `System.Text.Json` as the JSON backend
+  - `csharpSystemTextType` overrides the entire outputted type
+  - `csharpSystemTextContainer` overrides `IList<T>` or `IDictionary<string, T>`
+    in favor of a different container type
+- Golang
+  - `goType` overrides the entire outputted type
+- Java with Jackson as the JSON backend
+  - `javaJacksonType` overrides the entire outputted type
+  - `javaJacksonContainer` overrides `List<T>` or `Map<String, T>` in favor of a
+    different container type
+- Python
+  - `pythonType` overrides the entire outputted type
+- Rust
+  - `rustType` overrides the entire outputted type
+- TypeScript
+  - `typescriptType` overrides the entire outputted type
 
 ### Advanced Usage: Using `jtd-codegen` in a larger build process
 
