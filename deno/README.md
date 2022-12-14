@@ -9,7 +9,7 @@ This fork is intended to be used with Deno.
 ## Usage
 
 ```
-deno run -A deno.land/x/jtd_codegen_cli/mod.ts user.jtd.json --typescript-out user
+deno run -A https://deno.land/x/jtd_codegen_cli/mod.ts user.jtd.json --typescript-out user
 ```
 
 ## What is jtd-codegen?
